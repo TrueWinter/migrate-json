@@ -1,6 +1,6 @@
 {
   "name": "migrate-json",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A JSON migration tool, useful for updating config files after updates",
   "main": "index.js",
   "scripts": {

@@ -38,6 +38,7 @@ Then create migrations, taking note of the following:
 - The file name must be in the format of `{date+time}-migrationName.js`. It has been tested with the date format `YYYYMMDDHHMM` so may not work with other date formats.
 - The migration files need to export a `run` function and `config` object with the migration config. The run function should have two parameters, one for the config file path, and the other for a callback. The migration config should have two properties, one for the environment and the other for `run`, a boolean that states whether this migration should be run.
 - You must call the callback after completing the migration tasks to allow for the next migrations to run and for the `migrate` callback to be called, even if you only have one migration.
+- **The `dataFile` should be `.gitignore`d.**
 
 The following is an example from `example/migration/202101211619-addOptions.js`:
 
