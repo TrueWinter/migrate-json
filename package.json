@@ -1,0 +1,19 @@
+{
+  "name": "migrate-json",
+  "version": "0.0.1",
+  "description": "A JSON migration tool, useful for updating config files after updates",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JSON",
+    "migrate",
+    "migration"
+  ],
+  "author": "TrueWinter",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^3.2.0"
+  }
+}
