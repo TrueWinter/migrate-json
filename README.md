@@ -53,7 +53,7 @@ function runMigration(configFile, cb) {
 	config.password = 'correcthorsebatterystaple';
 
 	// Save data
-	fs.writeFileSync(configFile, JSON.stringify(config));
+	fs.writeFileSync(configFile, JSON.stringify(config, null, "\t"));
 
 	// Call callback function to allow for migrations to complete
 	cb(null, true);

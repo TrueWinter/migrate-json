@@ -5,7 +5,8 @@ function runMigration(configFile, cb) {
 
 	config.apiKey = 'auth';
 
-	fs.writeFileSync(configFile, JSON.stringify(config));
+	// eslint-disable-next-line quotes
+	fs.writeFileSync(configFile, JSON.stringify(config, null, "\t"));
 
 	cb(null, true);
 }
