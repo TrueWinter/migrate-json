@@ -13,6 +13,11 @@
   ],
   "author": "TrueWinter",
   "license": "MIT",
+  "homepage": "https://github.com/TrueWinter/migrate-json",
+  "repository": {
+	"type" : "git",
+	"url" : "https://github.com/TrueWinter/migrate-json"
+  },
   "dependencies": {
     "async": "^3.2.0"
   }
