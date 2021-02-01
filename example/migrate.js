@@ -1,5 +1,6 @@
-var migrate = require('../index').migrate;
+var migrateJSON = require('../index');
 var path = require('path');
+var fs = require('fs');
 
 var mConfig = {
 	directory: path.join(__dirname, 'migrations'),
@@ -8,7 +9,14 @@ var mConfig = {
 	env: 'dev'
 };
 
-migrate(mConfig, null, function(err, data) {
+if (!fs.existsSync(mConfig.dataFile)) {
+	// This can be used to set the `lastMigration` property in the migration data file to the install date
+	// to prevent previous migrations from being run. The `formatDate` function can be used to help with the
+	// date format
+	migrateJSON.setTimestamp(mConfig, '202101010000');
+}
+
+migrateJSON.migrate(mConfig, null, function(err, data) {
 	if (err) {
 		throw err;
 	}

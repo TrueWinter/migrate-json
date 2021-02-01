@@ -277,4 +277,37 @@ function migrate(config, currentVersion, cb) {
 	}
 }
 
+/**
+ * This sets the `lastMigration` property in the migration data file
+ * @param {Object} config The migrations config
+ * @param {string} config.dataFile The absolute path to the migrations data file
+ * @param {string} timestamp The timestamp in the YYYYMMDDHHMM format
+ */
+function setTimestamp(config, timestamp) {
+	if (!fs.existsSync(config.dataFile)) {
+		fs.writeFileSync(config.dataFile, JSON.stringify({}));
+	}
+
+	var migrationData = require(config.dataFile);
+	migrationData.lastMigration = timestamp;
+	fs.writeFileSync(config.dataFile, JSON.stringify(migrationData));
+}
+
+/**
+ * This function formats a Date object to a timestamp in the format of YYYYMMDDHHMM
+ * @param {Date} date The Date object
+ * @returns {string} A timestamp formatted as YYYYMMDDHHMM
+ */
+function formatDate(date) {
+	var year = date.getFullYear();
+	var month = date.getMonth().toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+	var day = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
+	var hour = date.getHours().toString().length === 1 ? `0${date.getHours()}` : date.getHours();
+	var minutes = date.getMinutes().toString().length === 1 ? `0${date.getMinutes()}` : date.getMinutes();
+
+	return `${year}${month}${day}${hour}${minutes}`;
+}
+
 module.exports.migrate = migrate;
+module.exports.setTimestamp = setTimestamp;
+module.exports.formatDate = formatDate;

@@ -9,7 +9,7 @@ Many projects use JSON to store their config as this allows for easy access to c
 Require Migrate-JSON in your project, like so:
 
 ```js
-var migrate = require('../index').migrate; // Update this as needed
+var migrateJSON = require('../index').migrate; // Update this as needed
 var path = require('path');
 
 // These must be absolute paths
@@ -66,6 +66,23 @@ var migrationConfig = {
 
 module.exports.run = runMigration;
 module.exports.config = migrationConfig;
+```
+
+To ensure that only future migrations run (instead of all previous migrations), MigrateJSON has a `setTimestamp` function. Use this to set the install date the first time your software runs.
+
+```js
+if (!fs.existsSync(mConfig.dataFile)) {
+	// This can be used to set the `lastMigration` property in the migration data file to the install date
+	// to prevent previous migrations from being run or can be set to an arbitrary date if required
+	migrateJSON.setTimestamp(mConfig, '202101010000');
+}
+```
+
+To help with this, a `formatDate` function is also available, which will take a Date object and return a timestamp in the format of `YYYYMMDDHHMM`.
+
+```js
+var date = new Date();
+migrateJSON.formatDate(date);
 ```
 
 ## License
